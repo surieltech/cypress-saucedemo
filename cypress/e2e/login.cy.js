@@ -8,7 +8,7 @@ describe('Login', () => {
     })
 
     //todos os passos da receita vem aqui
-    it('entra com o usuário e senha e checa produto', () => {
+    it('login with user and password and check product', () => {
         // precisa do get para achar o elemento e mexer nele
         cy.get('#user-name').type('standard_user')
         cy.get('#password').type('secret_sauce')
@@ -17,12 +17,30 @@ describe('Login', () => {
         cy.contains('Products').should('be.visible')
     })
 
-    it('mostra erro para usuário bloqueado', () => {
+    it('show error to blocked user', () => {
         //pegando o componente pelo data-test ao inves do id
        cy.get('[data-test="username"]').type('locked_out_user')
        cy.get('[data-test="password"]').type('secret_sauce')
        cy.get('[data-test="login-button"]').click()
        //para esse teste deve aparecer uma mensagem de erro
        cy.get('[data-test="error"]').should('contain', 'locked out')
+    })
+
+    it('show error to wrong password', () => {
+       cy.get('[data-test="username"]').type('standard_user')
+       cy.get('[data-test="password"]').type('password123')
+       cy.get('[data-test="login-button"]').click()
+       cy.get('[data-test="error"]').should('contain', 'do not match')
+    })
+
+    it('username is blank', () => {
+       cy.get('[data-test="login-button"]').click()
+       cy.get('[data-test="error"]').should('contain', 'Username is required')
+    })
+
+     it('password is blank', () => {
+       cy.get('[data-test="username"]').type('standard_user')
+       cy.get('[data-test="login-button"]').click()
+       cy.get('[data-test="error"]').should('contain', 'Password is required')
     })
 })
