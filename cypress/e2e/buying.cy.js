@@ -38,9 +38,10 @@ describe('Buying', () => {
 
     it('buying 2 products', () => {
         cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
-        cy.get('[data-test="shopping-cart-link"]').click()
+        cy.get('[data-test="add-to-cart-sauce-labs-bike-light"]').click()
         // confere se no carrinho tem realmente 2 itens
-        cy.get('[data-test="shopping-cart-link"]').should('have.text', '2')
+        cy.get('[data-test="shopping-cart-badge"]').should('have.text', '2')
+        cy.get('[data-test="shopping-cart-link"]').click()
         cy.get('[data-test="checkout"]').click()
         cy.get('[data-test="firstName"]').type('Suriel')
         cy.get('[data-test="lastName"]').type('Gomes')
