@@ -17,7 +17,7 @@ describe('Buying', () => {
         cy.get('[data-test="checkout"]').click()
         cy.get('[data-test="firstName"]').type('Suriel')
         cy.get('[data-test="lastName"]').type('Gomes')
-        cy.get('[data-test="postalCode"]').type('676767-000')
+        cy.get('[data-test="postalCode"]').type('67676-767')
         cy.get('[data-test="continue"]').click()
         cy.get('[data-test="finish"]').click()
         cy.contains('Thank you for your order!').should('be.visible')
